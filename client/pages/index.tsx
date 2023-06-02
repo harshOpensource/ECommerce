@@ -5,6 +5,7 @@ import Header from "@/components/Header/Header";
 import Hero from "@/components/Home/Hero/Hero";
 import Brands from "@/components/Home/Brands/Brands";
 import Promotions from "@/components/Home/Promotions/Promotions";
+import { Footer } from "@/components/Footer/Footer";
 
 type Props = {};
 
@@ -19,16 +20,12 @@ function index({}: Props) {
         <div className=" py-12 text-center text-3xl font-bold text-gray-600 md:text-4xl bg-white">
           Our Brands
         </div>
-        <div>
-          {!session?.user?.name && (
-            <button onClick={() => signIn("google")}>SignIn</button>
-          )}
-          {session?.user?.name}
-          <button onClick={() => signOut()}>SignOut</button>
-        </div>
+
         <Brands />
       </div>
       <Promotions />
+
+      <Footer />
     </div>
   );
 }
