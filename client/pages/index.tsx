@@ -1,15 +1,19 @@
 import React from "react";
 import { GetServerSideProps, NextPageContext } from "next";
 import { getSession, signIn, signOut, useSession } from "next-auth/react";
-import Hero from "@/src/components/Home/Hero/Hero";
-import Brands from "@/src/components/Home/Brands/Brands";
-import Promotions from "@/src/components/Home/Promotions/Promotions";
+import Header from "@/components/Header/Header";
+import Hero from "@/components/Home/Hero/Hero";
+import Brands from "@/components/Home/Brands/Brands";
+import Promotions from "@/components/Home/Promotions/Promotions";
+
 type Props = {};
+
 function index({}: Props) {
   const { data: session } = useSession();
   console.log("session", session);
   return (
     <div>
+      <Header />
       <Hero />
       <div className="bg-white">
         <div className=" py-12 text-center text-3xl font-bold text-gray-600 md:text-4xl bg-white">
