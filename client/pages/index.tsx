@@ -1,11 +1,10 @@
-import React from "react";
-import { GetServerSideProps, NextPageContext } from "next";
-import { getSession, signIn, signOut, useSession } from "next-auth/react";
-import Header from "@/components/Header/Header";
-import Hero from "@/components/Home/Hero/Hero";
-import Brands from "@/components/Home/Brands/Brands";
-import Promotions from "@/components/Home/Promotions/Promotions";
 import { Footer } from "@/components/Footer/Footer";
+import Header from "@/components/Header/Header";
+import Brands from "@/components/Home/Brands/Brands";
+import Hero from "@/components/Home/Hero/Hero";
+import Promotions from "@/components/Home/Promotions/Promotions";
+import { NextPageContext } from "next";
+import { getSession, useSession } from "next-auth/react";
 
 type Props = {};
 
