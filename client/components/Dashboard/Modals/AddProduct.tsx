@@ -1,33 +1,14 @@
-import Sidebar from "@/components/Dashboard/Sidebar/Sidebar";
-import Products from "@/components/Dashboard/Tables/Products";
 import {
   CREATE_PRODUCT_MUTATION,
   GET_PRODUCTS_QUERY,
 } from "@/graphql/operations";
 import { useMutation, useQuery } from "@apollo/client";
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
 
 type Props = {};
 
-function products({}: Props) {
-  return (
-    <div>
-      <div className="flex">
-        <Sidebar page="products" />
-
-        <main className="ml-20 w-full bg-gray-100">
-          <CreateProduct />
-          <Products />
-        </main>
-      </div>
-    </div>
-  );
-}
-
-export default products;
-
-const CreateProduct = () => {
+function AddProduct({}: Props) {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -48,34 +29,50 @@ const CreateProduct = () => {
   const [quantity, setQuantity] = useState<Number>(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [createProduct, { error }] = useMutation(CREATE_PRODUCT_MUTATION, {
-    onError: (error) => {
-      console.error("Error creating product:", error);
-    },
-    onCompleted: (data) => {
-      // Handle successful product creation
-      console.log("Product created:", data.createProduct);
-    },
-  });
+  const [createProduct, { error, loading: createLoader }] = useMutation(
+    CREATE_PRODUCT_MUTATION,
+    {
+      onError: (error) => {
+        console.error("Error creating product:", error);
+      },
+      onCompleted: (data) => {
+        // Handle successful product creation
+        console.log("Product created:", data.createProduct);
+        refetch();
+      },
+    }
+  );
 
-  const { data, loading } = useQuery(GET_PRODUCTS_QUERY);
+  const { data, loading, refetch } = useQuery(GET_PRODUCTS_QUERY);
 
   console.log(data);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    createProduct({
-      variables: {
-        input: {
-          name: name,
-          description: description,
-          price: price,
-          image: image,
-          category: category,
-          quantity: quantity,
+    try {
+      createProduct({
+        variables: {
+          input: {
+            name: name,
+            description: description,
+            price: price,
+            image: image,
+            category: category,
+            quantity: quantity,
+          },
         },
-      },
-    });
+      });
+      refetch();
+      console.log(data);
+
+      setName("");
+      setDescription("");
+      setCategory("");
+      setImage([]);
+      setQuantity(0);
+      setPrice(0);
+      setShowModal(false);
+    } catch (error) {}
   };
 
   const handleImage = async (event: any) => {
@@ -105,6 +102,7 @@ const CreateProduct = () => {
   const handleFileChange = (event: any) => {
     setFile(event.target.files);
   };
+
   return (
     <>
       <button
@@ -261,7 +259,7 @@ const CreateProduct = () => {
                               }}
                               alt="Uploaded Image"
                               key={imageUrl}
-                              className="items-center justify-center flex border-2 border-gray-400 p-2"
+                              className="items-center justify-center flex border-2 border-gray-400 p-1"
                             />
                           ))}
                         </div>
@@ -297,4 +295,6 @@ const CreateProduct = () => {
       ) : null}
     </>
   );
-};
+}
+
+export default AddProduct;

@@ -13,18 +13,18 @@ import { Search } from "./Search";
 type Props = {};
 
 export interface NavLink {
-  name: "men" | "women" | "kids" | "sale" | "blog" | "contacts";
+  name: "Men" | "Women" | "Kids" | "Sale" | "Blog" | "Contacts";
   href: string;
   collapsible?: boolean;
 }
 
 export const navLinks: NavLink[] = [
-  { name: "men", href: "/products/men", collapsible: true },
-  { name: "women", href: "/products/women", collapsible: true },
-  { name: "kids", href: "/products/kids" },
-  { name: "sale", href: "/sale" },
-  { name: "blog", href: "/blog" },
-  { name: "contacts", href: "/contacts" },
+  { name: "Men", href: "/products/men", collapsible: true },
+  { name: "Women", href: "/products/women", collapsible: true },
+  { name: "Kids", href: "/products/kids" },
+  { name: "Sale", href: "/sale" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contacts", href: "/contacts" },
 ];
 
 export const sideNavLinks: [string, IconType][] = [
@@ -79,6 +79,21 @@ function Header({}: Props) {
                   </Link>
                 </li>
               ))}
+
+              {session?.user.role === "user" && (
+                <li
+                  className={`font-medium text-neutral-700 transition-colors ${"hover:bg-violet-100 hover:text-violet-700"}`}
+                  onMouseLeave={handleCloseMenu}
+                >
+                  <Link
+                    href="/dashboard"
+                    className="flex h-full items-center px-5"
+                    onClick={handleCloseMenu}
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              )}
             </ul>
             <ul className="ml-auto items-center md:flex">
               <Search onSearch={(value) => console.log(value)} />
