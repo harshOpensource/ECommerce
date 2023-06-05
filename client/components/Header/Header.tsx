@@ -4,13 +4,16 @@ import React, { useState } from "react";
 import logo from "../../public/assets/logo.png";
 import TopBar from "./TopBar";
 import AnnouncementBar from "./AnnouncementBar";
-import { FiUser, FiHeart, FiShoppingBag } from "react-icons/fi";
+import { FiUser, FiHeart, FiShoppingBag, FiShoppingCart } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { signOut, useSession } from "next-auth/react";
 import { Transition } from "@headlessui/react";
 import { Search } from "./Search";
+import { FaShoppingCart } from "react-icons/fa";
 
-type Props = {};
+type Props = {
+  cart?: number;
+};
 
 export interface NavLink {
   name: "Men" | "Women" | "Kids" | "Sale" | "Blog" | "Contacts";
@@ -29,11 +32,10 @@ export const navLinks: NavLink[] = [
 
 export const sideNavLinks: [string, IconType][] = [
   ["/wishlist", FiHeart],
-  ["/cart", FiShoppingBag],
   ["/signin", FiUser],
 ];
 
-function Header({}: Props) {
+function Header({ cart }: Props) {
   const { data: session } = useSession();
 
   const [hoveredNavLink, setHoveredNavLink] = useState<NavLink | null>();
@@ -105,6 +107,18 @@ function Header({}: Props) {
                   />
                 </Link>
               ))}
+
+              <Link href="/checkout" className="ml-5 hidden md:block relative">
+                <FiShoppingCart
+                  className="text-neutral-700 transition-colors hover:text-violet-700"
+                  size="20px"
+                />
+
+                <span className="absolute -top-3 -right-2 bg-yellow-300 rounded-full px-1 font-semibold text-sm">
+                  {cart}
+                </span>
+              </Link>
+
               {session && (
                 <button
                   className="ml-5 hidden rounded-full border border-solid border-violet-700 p-[2px] md:block"

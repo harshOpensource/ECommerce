@@ -28,3 +28,16 @@ export const GET_PRODUCTS_QUERY = gql`
     }
   }
 `;
+
+export const CREATE_ORDER_MUTATION = gql`
+  mutation CreateOrder(
+    $userId: String!
+    $products: [ProductInput]!
+    $total: Float!
+  ) {
+    createOrder(userId: $userId, products: $products, total: $total) {
+      id
+      total
+    }
+  }
+`;
