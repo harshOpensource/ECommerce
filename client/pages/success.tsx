@@ -4,14 +4,14 @@ import {
   AiOutlineArrowUp,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, NextPageContext } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 interface Props {}
 function Success({}: Props) {
   const router = useRouter();
@@ -93,3 +93,22 @@ function Success({}: Props) {
   );
 }
 export default Success;
+
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context);
+
+  if (!session || session.user.role !== "admin") {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+}

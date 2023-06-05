@@ -41,3 +41,37 @@ export const CREATE_ORDER_MUTATION = gql`
     }
   }
 `;
+
+export const GET_USERS = gql`
+  query {
+    getUsers {
+      id
+      email
+      image
+      name
+      role
+    }
+  }
+`;
+
+export const CHANGE_USER_ROLE = gql`
+  mutation ChangeUserRole($userId: String!) {
+    changeUserRole(userId: $userId) {
+      id
+      email
+      name
+      role
+    }
+  }
+`;
+
+export const DELETE_USER = gql`
+  mutation DeleteUser($userId: String!) {
+    deleteUser(userId: $userId) {
+      id
+      email
+      name
+      role
+    }
+  }
+`;

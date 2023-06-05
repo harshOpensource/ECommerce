@@ -7,7 +7,10 @@ export const typeDefs = gql`
     deleteProduct(id: ID!): Product!
     updateProduct(id: ID!, input: ProductInput!): Product!
     createOrder(userId: String!, total: Int!, products: [OrderInput]!): Order!
+    changeUserRole(userId: String!): User!
+    deleteUser(userId: String): User!
   }
+
   input OrderInput {
     id: String!
     name: String!
@@ -59,14 +62,15 @@ export const typeDefs = gql`
     userId: String!
   }
   type User {
-    id: ID!
-    name: String
-    email: String
-    emailVerified: String
-    image: String
+    id: String!
+    email: String!
+    image: String!
+    name: String!
+    role: String!
   }
   type Query {
     getProducts: [Product!]!
     getOrders: [Order!]!
+    getUsers: [User!]!
   }
 `;

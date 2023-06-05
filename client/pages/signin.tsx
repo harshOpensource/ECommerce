@@ -75,6 +75,7 @@ hover:bg-zinc-100"
   );
 }
 export default signin;
+
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
   if (session?.user) {

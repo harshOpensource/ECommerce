@@ -13,6 +13,10 @@ export const resolvers = {
       const orders = await Prisma.order.findMany();
       return orders;
     },
+    getUsers: async () => {
+      const users = await Prisma.user.findMany();
+      return users;
+    },
   },
   Mutation: {
     createProduct: async (_: any, { input }: { input: ProductInput }) => {
@@ -83,6 +87,40 @@ export const resolvers = {
         },
       });
       return order;
+    },
+
+    changeUserRole: async (_: any, { userId }: { userId: string }) => {
+      const user = await Prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+      });
+
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      const newRole = user.role === "user" ? "admin" : "user";
+
+      const updatedUser = await Prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          role: newRole,
+        },
+      });
+
+      return updatedUser;
+    },
+
+    deleteUser: async (_: any, { userId }: { userId: string }) => {
+      const user = await Prisma.user.delete({
+        where: {
+          id: userId,
+        },
+      });
+      return user;
     },
   },
 };

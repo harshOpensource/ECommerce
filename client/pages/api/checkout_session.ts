@@ -17,14 +17,14 @@ export default async function handler(
     // This is the shape in which stripe expects the data to be
     const transformedItems = items.map((item) => ({
       price_data: {
-        currency: "usd",
+        currency: "inr",
         product_data: {
           name: item.name,
           images: [item.image[0]],
         },
         unit_amount: item.price * 100,
       },
-      quantity: 1,
+      quantity: item.quantity,
     }));
 
     try {

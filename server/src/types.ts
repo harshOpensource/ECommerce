@@ -40,11 +40,10 @@ export interface Session {
 }
 export interface User {
   id: string;
-  username: string;
   email: string;
   image: string;
   name: string;
-  emailVerified: boolean;
+  role: string;
 }
 export interface GraphQlContext {
   session: Session | null;

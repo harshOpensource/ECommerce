@@ -165,15 +165,28 @@ hover:underline"
 rounded-xl bg-gray-200 p-8 py-12 md:order-2"
                   >
                     <h4 className="mb-4 flex flex-col text-xl font-semibold">
-                      Pay in full
+                      Pay full Upfront
                       <span>{/* currency */}</span>
                     </h4>
-                    <Button
-                      noIcon
-                      title="Check Out"
-                      width="w-full"
-                      onClick={() => createCheckoutSession()}
-                    />
+                    {session?.user.email ? (
+                      <div>
+                        <Button
+                          noIcon
+                          title="Check Out"
+                          width="w-full"
+                          onClick={() => createCheckoutSession()}
+                        />
+                      </div>
+                    ) : (
+                      <div>
+                        <Button
+                          noIcon
+                          title="Sign In First"
+                          width="w-full"
+                          onClick={() => router.push("/signin")}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

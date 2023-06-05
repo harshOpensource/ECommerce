@@ -7,7 +7,6 @@ import { Footer } from "@/components/Footer/Footer";
 import LeftNavigation from "@/components/Products/LeftNavigation";
 import AllProducts from "@/components/Products/AllProducts";
 import { useDispatch } from "react-redux";
-import {} from "../../Store/store";
 import { useSelector } from "react-redux";
 
 type Props = {};

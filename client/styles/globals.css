@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.slider-input {
+  -webkit-appearance: none;
+  width: 35%;
+  height: 20px;
+  background-color: #ccc;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  border-radius: 30%;
+  cursor: pointer;
+}
+
+.slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #18db1f;
+  cursor: pointer;
+}
+
+.slider-input::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #bd68dd;
+  cursor: pointer;
+}
+
+.user-role {
+  background-color: #ccc;
+}
+
+.admin-role {
+  background-color: #4caf50;
+}
+
+.user-text {
+  color: #ccc;
+}
+
+.admin-text {
+  color: #4caf50;
+}

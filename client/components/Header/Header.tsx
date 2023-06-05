@@ -82,7 +82,7 @@ function Header({ cart }: Props) {
                 </li>
               ))}
 
-              {session?.user.role === "user" && (
+              {session?.user.role === "admin" && (
                 <li
                   className={`font-medium text-neutral-700 transition-colors ${"hover:bg-violet-100 hover:text-violet-700"}`}
                   onMouseLeave={handleCloseMenu}

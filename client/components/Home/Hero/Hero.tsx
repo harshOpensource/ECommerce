@@ -38,7 +38,7 @@ function Hero({}: Props) {
               wear Dine outfits.{" "}
             </h3>
             <Link
-              href={"/"}
+              href={"/products/products"}
               data-aos="fade-up"
               data-aos-delay="500"
               className="mb-10 flex items-center rounded bg-zinc-900 px-8 py-2.5 text-base font-normal text-white shadow-sm shadow-zinc-500"
